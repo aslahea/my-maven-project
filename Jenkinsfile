@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        JAVA_HOME = '/usr/lib/jvm/java-11-openjdk-amd64' // Changed to Java 11
+        JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
         PATH = "${JAVA_HOME}/bin:${PATH}"
         
         SONAR_PROJECT_KEY = 'com.mycompany.app:my-maven-project'
@@ -64,7 +64,7 @@ pipeline {
         stage('Quality Gate Check') {
             steps {
                 echo 'Waiting for Quality Gate status...'
-                timeout(time: 30, unit: 'MINUTES') { 
+                timeout(time: 10, unit: 'MINUTES') { 
                     waitForQualityGate abortPipeline: true
                 }
                 sh 'echo "Quality Gate Passed Successfully!" > quality_gate_report.txt'
